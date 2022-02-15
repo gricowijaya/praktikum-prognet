@@ -1,10 +1,12 @@
 # Kelompok 9 Praktikum Prognet
 
-Untuk **soal dan panduan** ada di directory **Prognet 2022/**
+Untuk **soal dan panduan, Upload Pengerjaan Laporan update di branch main aja** ada di directory **Prognet 2022/ **
 
 Untuk **Kode Program Project E-commerce** ada di directory  PraktikumECommerce/ 
 
 Untuk develop per modul dapat dibuat branch masing-masing modul seperti branch modul-1, modul-2, modul-3, modul-4, modul-5. Kalau programnya udah fix baru bisa dimasukin ke branch master atau branch main. 
+
+Kalau misalnya ada update penting baru ada di branch main nantinya misalnya kek tema, update migration dll.
 
 # Develop nya dengan cara 
 
