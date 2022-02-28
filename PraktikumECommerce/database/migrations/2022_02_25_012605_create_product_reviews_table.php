@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('product_reviews', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('product_id');
-            $table->uuid('user_id');
+            $table->foreignUuid('product_id')->constrained('products');
+            $table->foreignUuid('user_id')->constrained('users');
             $table->enum('rate', ['1','2','3','4','5']);
             $table->string('content');
             $table->timestamps();

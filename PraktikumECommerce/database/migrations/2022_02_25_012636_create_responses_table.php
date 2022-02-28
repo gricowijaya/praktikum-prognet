@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('responses', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('review_id');
-            $table->uuid('admin_id');
+            $table->foreignUuid('review_id')->constrained('product_reviews');
+            $table->foreignUuid('admin_id')->constrained('admins');
             $table->string('content');
             $table->timestamps();
         });

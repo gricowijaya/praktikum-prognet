@@ -22,8 +22,8 @@ return new class extends Migration
             $table->decimal('total');
             $table->decimal('shipping_cost');
             $table->decimal('sub_total');
-            $table->uuid('user_id');
-            $table->uuid('courier_id');
+            $table->foreignUuid('user_id')->constrained('users');
+            $table->foreignUuid('courier_id')->constrained('couriers');
             $table->string('proof_of_payment');
             $table->timestamps();
             $table->enum('status', ['not_verified', 'verfied', 'delievered', 'success', 'failed']);

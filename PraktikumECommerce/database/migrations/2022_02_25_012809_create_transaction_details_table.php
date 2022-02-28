@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('transaction_details', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('transaction_id');
-            $table->uuid('product_id');
+            $table->foreignUuid('transaction_id')->constrained('transactions');
+            $table->foreignUuid('product_id')->constrained('products');
             $table->integer('qty');
             $table->decimal('discount');
             $table->decimal('selling_price');

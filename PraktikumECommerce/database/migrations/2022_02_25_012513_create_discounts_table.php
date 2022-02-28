@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('id_product');
+            $table->foreignUuid('id_product')->constrained('products');
             $table->decimal('percentage');
-            $table->timestamp('start');
-            $table->timestamp('end');
+            $table->date('start');
+            $table->date('end');
             $table->timestamps();
         });
     }

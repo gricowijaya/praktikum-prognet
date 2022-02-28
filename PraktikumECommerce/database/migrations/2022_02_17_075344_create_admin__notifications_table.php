@@ -17,7 +17,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('type');
             $table->string('notifiable_type');
-            $table->string('notifiable_id');
+            $table->foreignUuid('notifiable_id')->constrained('admins');
             $table->string('data');
             $table->timestamp('read_at');
             $table->timestamps();
