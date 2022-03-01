@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,41 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/', function () {
-        Route::get('login', [AdminController::class, 'showLogin'])->name('showLogin');
-        // Route::post('login', [AdminController::class, 'login'])->name('login');
+        // return redirect()->route('users.login');
+    return view('pages.users.login.index');
+
+});
+
+Route::prefix('users/')->name('users')->group(function () {
+  Route::get('/', function() { 
+      return redirect()->route('users.login');
+  });
+
+  Route::middleware('guest')->group(function () { 
+        Route::get('login', [UserController::class, 'showLogin'])->name('showLogin');
+        Route::post('login', [UserController::class, 'login'])->name('login');
+  });
+
+  Route::middleware('auth:users')->group(function () {
+        Route::post('logout', [MahasiswaController::class, 'logout'])->name('logout');
+        Route::get('dashboard', [MahasiswaController::class, 'dashboard'])->name('dashboard');
+  });
+});
+
+Route::prefix('admins/')->name('admins')->group(function () {
+  Route::get('/', function() { 
+      return redirect()->route('admins.login');
+  });
+
+  Route::middleware('guest')->group(function () { 
+        Route::get('login', [UserController::class, 'showLogin'])->name('showLogin');
+        Route::post('login', [UserController::class, 'login'])->name('login');
+  });
+
+  Route::middleware('auth:admins')->group(function () {
+        Route::post('logout', [MahasiswaController::class, 'logout'])->name('logout');
+        Route::get('dashboard', [MahasiswaController::class, 'dashboard'])->name('dashboard');
+  });
 });
 
 Route::get('home', function () {
