@@ -38,7 +38,7 @@
 								<!-- </div> -->
 			      	</div>
                   @yield('form')
-		          <p class="text-center">Not a member? <a data-toggle="tab" href="#signup">Sign Up</a></p>
+                  @yield('registration-link')
 		        </div>
 		      </div>
 				</div>
