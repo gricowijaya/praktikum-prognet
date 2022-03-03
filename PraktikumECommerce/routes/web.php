@@ -16,40 +16,40 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-        // return redirect()->route('users.login');
-    return view('pages.users.login.index');
-
+      return redirect()->route('users.login');
 });
 
-Route::prefix('users/')->name('users')->group(function () {
+Route::prefix('users/')->name('users.')->group(function () {
   Route::get('/', function() { 
       return redirect()->route('users.login');
   });
 
   Route::middleware('guest')->group(function () { 
-        Route::get('login', [UserController::class, 'showLogin'])->name('showLogin');
+        Route::get('register', [UserController::class, 'register_index'])->name('register-index');
+        Route::post('register', [UserController::class, 'register'])->name('register');
+        Route::get('login', [UserController::class, 'index'])->name('login-index');
         Route::post('login', [UserController::class, 'login'])->name('login');
   });
 
   Route::middleware('auth:users')->group(function () {
-        Route::post('logout', [MahasiswaController::class, 'logout'])->name('logout');
-        Route::get('dashboard', [MahasiswaController::class, 'dashboard'])->name('dashboard');
+        Route::post('logout', [UserController::class, 'logout'])->name('logout');
+        Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
   });
 });
 
-Route::prefix('admins/')->name('admins')->group(function () {
+Route::prefix('admins/')->name('admins.')->group(function () {
   Route::get('/', function() { 
       return redirect()->route('admins.login');
   });
 
   Route::middleware('guest')->group(function () { 
-        Route::get('login', [UserController::class, 'showLogin'])->name('showLogin');
-        Route::post('login', [UserController::class, 'login'])->name('login');
+        Route::get('login', [AdminController::class, 'index'])->name('login-index');
+        Route::post('login', [AdminController::class, 'login'])->name('login');
   });
 
   Route::middleware('auth:admins')->group(function () {
-        Route::post('logout', [MahasiswaController::class, 'logout'])->name('logout');
-        Route::get('dashboard', [MahasiswaController::class, 'dashboard'])->name('dashboard');
+        Route::post('logout', [AdminController::class, 'logout'])->name('logout');
+        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
   });
 });
 
