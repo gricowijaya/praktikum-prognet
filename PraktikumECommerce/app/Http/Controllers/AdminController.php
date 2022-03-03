@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    public function showLogin()
+    public function index()
     {
         return view('pages.admins.login.index');
     }
@@ -17,18 +17,18 @@ class AdminController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'name' => ['required'],
+            'username' => ['required'],
             'password' => ['required'],
         ]);
 
         if (Auth::guard('admins')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('pegawai/dashboard');
+            return redirect()->intended('admins/dashboard');
         }
 
         return back()->withErrors([
-            'name' => 'username yang anda masukkan salah. Coba kembali!',
+            'username' => 'Use the right admin username!',
         ]);
     }
   
@@ -40,7 +40,7 @@ class AdminController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('admins.showLogin');
+        return redirect()->route('admins.login');
     }
 
     public function dashboard()
