@@ -3,14 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Faker\Provider\Uuid;
 use Illuminate\Support\Str;
+use Illuminate\Auth\Events\Registered;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -56,6 +58,19 @@ class User extends Authenticatable
               $model->status = 'active';
           }
         });
+
+        VerifyEmail::toMailUsing(function ($notifiable, $url)
+        { 
+            return (new MailMessage)
+              ->subject('Verify Email Address')
+              ->line('Please click the button below to verify your email address')
+              ->action('Verify Email Address', $url);
+        });
+    }
+
+    public function routeNotificationForMail($notification)
+    {
+        return [$this->email => $this->name];
     }
 
     public function product_reviews() { 
