@@ -6,9 +6,14 @@
 							<form action="{{route('admins.login')}}" method="POST" class="signin-form">
                 @csrf
 			      		<div class="form-group mb-3">
-			      			<label class="label" for="name">Admin Email</label>
-			      			<input name="email" id="email" type="email" class="form-control" placeholder="Email" autofocus required>
+			      			<label class="label" for="name">Admin Username</label>
+			      			<input name="username" id="username" type="text" class="form-control @error('username') is-invalid@enderror" placeholder="Username" autofocus required>
 			      		</div>
+                @error('username')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
 		            <div class="form-group mb-3">
 		            	<label class="label" for="password">Password</label>
 		              <input name="password" id="password" type="password" class="form-control" placeholder="Password" autofocus required>
