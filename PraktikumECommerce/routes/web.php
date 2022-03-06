@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Support\Facades\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +31,30 @@ Route::prefix('users/')->name('users.')->group(function () {
         Route::post('register', [UserController::class, 'register'])->name('register');
         Route::get('login', [UserController::class, 'index'])->name('login-index');
         Route::post('login', [UserController::class, 'login'])->name('login');
+
+        Route::get('/email/verify', function() { 
+              return view('pages.users.email');
+        })->name('verification.notice');
+       
+        Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+            $request->fulfill();
+         
+            return redirect('/home');
+        })->name('verification.verify');
+
+        Route::post('/email/verification-notification', function (Request $request) {
+            $request->user()->sendEmailVerificationNotification();
+         
+            return back()->with('message', 'Verification link sent!');
+        })->name('verification.send');
   });
 
-  Route::middleware('auth:users')->group(function () {
+  Route::middleware('auth:users', 'verified')->group(function () {
         Route::post('logout', [UserController::class, 'logout'])->name('logout');
         Route::get('dashboard', [UserController::class, 'dashboard'])->name('dashboard');
   });
+
+
 });
 
 Route::prefix('admins/')->name('admins.')->group(function () {
