@@ -16,6 +16,7 @@ class AdminController extends Controller
 
     public function login(Request $request)
     {
+        // dd($request);
         $credentials = $request->validate([
             'username' => ['required'],
             'password' => ['required'],
