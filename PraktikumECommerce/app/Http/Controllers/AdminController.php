@@ -18,14 +18,14 @@ class AdminController extends Controller
     {
         // dd($request);
         $credentials = $request->validate([
-            'username' => ['required'],
+            'username' => ['required', 'text', 'exists:admin'],
             'password' => ['required'],
         ]);
 
         if (Auth::guard('admins')->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('admins/dashboard');
+            return redirect()->route('admins.dashboard');
         }
 
         return back()->withErrors([
@@ -46,9 +46,6 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        // $ = Mahasiswa::where('status_mahasiswa', 1)->get()->count();
-        // $dosen = Dosen::where('status_dosen', 1)->get()->count();
-        // return view('pages.admins.dashboard.index', compact('mahasiswa', 'dosen'));
         return view('pages.admins.dashboard.index');
     }
 }

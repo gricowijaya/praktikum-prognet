@@ -12,6 +12,7 @@ class UserController extends Controller
     public function index()
     {
         return view('pages.users.login.index');
+        // return view('auth.login');
     }
 
     public function register_index()
@@ -23,18 +24,9 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required' , 'string' , 'max:255'],
             'email' => ['required' , 'email' , 'max:255'],
-            'password' => ['required', 'min:8', 
-               'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/', 
-               'confirmed'] ,
+            'password' => ['required', 'min:8'],
         ]);
     
-        // if ($request->file('users_profile_picture')) {
-        //     $picture = $request->file('users_profile_picture');
-        //     $nameFile = date('ymdhis') . '_' . $request->name . '.' . $picture->getClientOriginalExtension();
-        //     $picture->storeAs('users_profile_picture', $nameFile);
-        // }
-
-
         User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -49,19 +41,17 @@ class UserController extends Controller
         // dd($request);
         $credentials = $request->validate([
             'email' => ['required' , 'email' , 'max:255'],
-            'password' => ['required', 'min:8', 
-               'regex:/^.*(?=.{3,})(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[\d\x])(?=.*[!$#%]).*$/', 
-               'confirmed'] ,
+            'password' => ['required', 'min:8'],
         ]);
 
-        if (Auth::guard('users')->attempt($credentials)) {
-            if (!Hash::check(request()->password, auth()->user()->password)) {
+        // if (Auth::guard('users')->attempt($credentials)) {
+            if (!Hash::check($request->password, auth('users')->user()->password)) {
                 return back()->withErrors(['password' => 'The provided password does not match our records.']);
             }
       
             $request->session()->regenerate();
             return redirect()->intended('users/dashboard');
-        }
+        // }
 
         return back()->withErrors([
             'email' => 'Your email does not match our records, Please enter the registered email !!',

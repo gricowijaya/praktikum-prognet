@@ -5,6 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Admins;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Faker\Provider\Uuid;
 
 class AdminSeeder extends Seeder
 {
@@ -22,14 +25,14 @@ class AdminSeeder extends Seeder
         $profile_pic = ['Picture 1', 'Picture 2', 'Picture 3', 'Picture 4'];
 
         for ($i = 0; $i < 3; $i++) {
-            Admins::create([
-                'name' => $name[$i],
-                'username' => $username[$i],
-                'profile_image' => $profile_pic[$i],
-                'phone' => '082348758492',
-                // 'password' => Hash::make('pass')
-                'password' => 'pass'
-            ]);
+          DB::table('admins')->insert([
+                  'name' => $name[$i],
+                  'username' => $username[$i],
+                  'profile_image' => $profile_pic[$i],
+                  'phone' => '082348758492',
+                  'password' => Hash::make('pass'),
+                  'remember_token' => '12345',
+          ]);
         }
     }
 }

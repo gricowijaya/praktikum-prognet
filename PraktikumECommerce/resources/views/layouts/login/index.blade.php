@@ -37,8 +37,9 @@
 								<!-- 	</p> -->
 								<!-- </div> -->
 			      	</div>
+                  @yield('content')
                   @yield('form')
-                  @yield('registration-link')
+                  <!-- @yield('registration-link') -->
 		        </div>
 		      </div>
 				</div>
