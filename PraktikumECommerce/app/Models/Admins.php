@@ -24,15 +24,15 @@ class Admins extends Authenticatable
       'password', 'remember_token',
     ];
 
-    // public static function boot()
-    // {
-    //     parent::boot();
-    //     static::creating(function ($model) {
-    //       if(empty($model->{$model->getKeyName()})) {
-    //           $model->{$model->getKeyName()} = Str::uuid();
-    //       }
-    //     });
-    // }
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($model) {
+          if(empty($model->{$model->getKeyName()})) {
+              $model->{$model->getKeyName()} = Str::uuid();
+          }
+        });
+    }
 
     public function admin_notifications() {
       return $this->hasMany(Admin_Notification::class);
