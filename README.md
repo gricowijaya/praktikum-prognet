@@ -10,26 +10,35 @@ Kalau misalnya ada update penting baru ada di branch main nantinya misalnya kek 
 
 # Develop nya dengan cara 
 
-  git clone https://github.com/gricowijaya/praktikum-prognet.git
+Buat database namanya PraktikumECommerce
 
-  cd PraktikumECommerce/
+    git clone https://github.com/gricowijaya/praktikum-prognet.git
 
-  composer install
+    cd PraktikumECommerce/
 
-  cp .env.example .env 
+    composer install && composer update && npm install && npm run dev
+
+    cp .env.example .env 
 
 # Konfigurasi .env
 
 Konfig .env udah disiapin biar semua nama database dari satu komputer dengan komputer lainnya sama. kalau udah di copy bisa langsung
 
-  php artisan key:generate
+    php artisan key:generate
 
-# Buat Migration.
+tambahin line ini di mailer nya 
 
-Masih Proses.
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=7614054437a94d
+MAIL_PASSWORD=a14cd3f27f4aec
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="kelompok9praktikumprognet@gmail.com"
+MAIL_FROM_NAME="${APP_NAME}"
 
 # Buat Mailer 
 
-Ada soal yang make mail itu bisa diedit di .env nya ntar
+    Ada soal yang make mail itu bisa diedit di .env nya ntar paka mailtrap.io
 
 **SEMANGAT**
