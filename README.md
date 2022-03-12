@@ -37,6 +37,13 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS="kelompok9praktikumprognet@gmail.com"
 MAIL_FROM_NAME="${APP_NAME}"
 
+# di mailtrap.io
+
+Di Mailtrap masuk dengan akun gugel pake credential dibawah ini.
+
+email    : kelompok9praktikumprognet@gmail.com
+password : $123456789kelompok9
+
 # Buat Mailer 
 
     Ada soal yang make mail itu bisa diedit di .env nya ntar paka mailtrap.io
