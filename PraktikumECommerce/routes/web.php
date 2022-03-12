@@ -25,7 +25,7 @@ Route::get('/', function () {
 Route::prefix('users/')->name('users.')->group(function () {
 
   Route::get('/', function() { 
-      return redirect()->route('users.login');
+      return redirect()->route('login');
   });
 
   Route::middleware(['guest'])->group(function () { 
@@ -34,21 +34,21 @@ Route::prefix('users/')->name('users.')->group(function () {
         Route::get('login', [UserController::class, 'index'])->name('login-index');
         Route::post('login', [UserController::class, 'login'])->name('login');
 
-        Route::get('/email/verify', function() {
-              return view('pages.users.email');
-        })->name('verification.notice');
-
-        Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-            $request->fulfill();
-
-            return redirect('/dashboard');
-        })->name('verification.verify');
-
-        Route::post('/email/verification-notification', function (Request $request) {
-            $request->user()->sendEmailVerificationNotification();
-            return back()->with('message', 'Verification link sent!');
-
-        })->name('verification.send');
+        // Route::get('/email/verify', function() {
+        //       return view('pages.users.email');
+        // })->name('verification.notice');
+        //
+        // Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        //     $request->fulfill();
+        //
+        //     return redirect('/dashboard');
+        // })->name('verification.verify');
+        //
+        // Route::post('/email/verification-notification', function (Request $request) {
+        //     $request->user()->sendEmailVerificationNotification();
+        //     return back()->with('message', 'Verification link sent!');
+        //
+        // })->name('verification.send');
   });
 
   Route::middleware('auth:users', 'verified')->group(function () {
@@ -73,18 +73,6 @@ Route::prefix('admins/')->name('admins.')->group(function () {
         Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
   });
 });
-
-// Route::get('home', function () {
-//     return redirect()->route('users.dashboard');
-// });
-//
-// Route::get('shop', function () {
-//     return view('homepage');
-// });
-//
-// Route::get('item', function () {
-//     return view('item');
-// });
 
 Auth::routes(['verify'=>true]);
 
