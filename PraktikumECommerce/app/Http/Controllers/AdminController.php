@@ -18,7 +18,7 @@ class AdminController extends Controller
     {
         // dd($request);
         $credentials = $request->validate([
-            'username' => ['required', 'text', 'exists:admin'],
+            'username' => ['required'],
             'password' => ['required'],
         ]);
 
