@@ -24,12 +24,14 @@ class AdminSeeder extends Seeder
 
         $profile_pic = ['Picture 1', 'Picture 2', 'Picture 3', 'Picture 4'];
 
+        $phone_number = ['0823487581', '0823487582', '0823487583', '0823487584'];
+
         for ($i = 0; $i < 3; $i++) {
           DB::table('admins')->insert([
                   'name' => $name[$i],
                   'username' => $username[$i],
                   'profile_image' => $profile_pic[$i],
-                  'phone' => '082348758492',
+                  'phone' => $phone_number[$i],
                   'password' => Hash::make('pass'),
                   'remember_token' => '12345',
           ]);
