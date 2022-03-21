@@ -8,6 +8,10 @@ Untuk develop per modul dapat dibuat branch masing-masing modul seperti branch m
 
 Kalau misalnya ada update penting baru ada di branch main nantinya misalnya kek tema, update migration dll.
 
+# Gunakan Database
+
+Dapat digunakan database db_praktikum_prognet.sql yang sudah disediakan lalu nantinya dapat dilakukan import
+
 # Develop nya dengan cara 
 
 Buat database namanya PraktikumECommerce
