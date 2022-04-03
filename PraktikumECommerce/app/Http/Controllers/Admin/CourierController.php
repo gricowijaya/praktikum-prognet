@@ -7,11 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Couriers;
 use Redirect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 class CourierController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth:admins']);
+    }
+    
     public function index(){
-        $couriers = Couriers::orderby('id','desc')->paginate(5);
+        $couriers = Couriers::paginate(5);
+        Paginator::useBootstrap();
         return view('pages.admins.courier.courierlist', compact('couriers'));
     }
     
@@ -20,21 +26,31 @@ class CourierController extends Controller
     }
     
     public function store(Request $request){
-        $couriers = new Couriers;
-        $couriers->courier = $request->courier;
+        $this->validate($request,[
+            'courier' => 'required|unique:couriers|max:100'
+        ]);
+
+        $couriers = Couriers::create([
+            'courier' => $request->courier
+        ]);
         $couriers->save();
         return Redirect::to('/admins/couriers');
     }
 
     public function edit($id){
-        $where = array('id' => $id);
-        $data['courier'] = Couriers::where($where)->first();
-        return view('pages.admins.courier.courieredit', $data);        
+        $courier = Couriers::find($id);
+        return view('pages.admins.courier.courieredit', compact('courier'));        
     }    
 
     public function update(Request $request, $id){
-        $update = ['courier' => $request->courier];
-        Couriers::where('id', $id)->update($update);
+        $this->validate($request,[
+            'courier' => 'required|unique:couriers|max:100'
+        ]);
+
+        $courier = Couriers::find($id);
+        $courier->update([
+            'courier' => $request->courier
+        ]);
         return Redirect::to('/admins/couriers');
     }
 

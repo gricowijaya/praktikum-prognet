@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table">
-                            <h2>List Categories</h2>
+                            <h2>List Couriers</h2>
                             <br>
                             <button type="button" class="btn bg-gradient-success">
                                 <a href="couriers/create">Add Courier</a>
@@ -23,16 +23,17 @@
                                 <tbody>
                                     @foreach($couriers as $courier)                                    
                                     <tr class="">
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $couriers->firstItem()+$loop->index }}</td>
                                         <td>{{ $courier->courier }}</td>
                                         <td style="align: center;">
-                                            <a href="couriers/edit/{{$courier->id}}" class="btn bg-gradient-warning">Edit</a>
-                                            <a href="/admins/couriers/delete/{{$courier->id}}" class="btn bg-gradient-danger" onclick="return confirm('Apa yakin ingin menghapus data ini?')">Delete</a>
+                                            <a href="couriers/{{$courier->id}}/edit" class="btn bg-gradient-warning">Edit</a>
+                                            <a href="/admins/couriers/{{$courier->id}}/delete" class="btn bg-gradient-danger" onclick="return confirm('Apa yakin ingin menghapus data ini?')">Delete</a>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @endforeach 
                                 </tbody>
                             </table>
+                            {{ $couriers->links() }}
                         </div>
                     </div>
                 </div>

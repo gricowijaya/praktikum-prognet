@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\CourierController;
 use App\Http\Controllers\HomeUnauthController;
+use App\Http\Controllers\HomeController; 
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', [HomeUnauthController::class, 'home']);
+Route::get('/', [HomeUnauthController::class, 'index']);
+Route::get('/product/{id}', [HomeUnauthController::class, 'show']);
+Route::get('/home', [HomeController::class, 'index']);
+
 
 // Route::get('/', function () {
 //       return redirect()->route('login');
@@ -87,17 +91,19 @@ Route::prefix('admins/')->name('admins.')->group(function () {
   Route::get('categories', [CategoryController::class, 'index']);
   Route::get('categories/create', [CategoryController::class, 'create']);
   Route::post('categories/store', [CategoryController::class, 'store']);
-  Route::get('categories/edit/{id}', [CategoryController::class, 'edit']);
-  Route::post('categories/update/{id}', [CategoryController::class, 'update']);
-  Route::get('categories/delete/{id}', [CategoryController::class, 'delete']);
+  Route::get('categories/{id}/edit', [CategoryController::class, 'edit']);
+  Route::post('categories/{id}/update', [CategoryController::class, 'update']);
+  Route::get('categories/{id}/delete', [CategoryController::class, 'delete']);
   
   Route::get('products', [ProductController::class, 'index']);
   Route::get('products/create', [ProductController::class, 'create']);
   Route::post('products/store', [ProductController::class, 'store']);
-  Route::get('products/show/{id}', [ProductController::class, 'show']);
-  Route::get('products/edit/{id}', [ProductController::class, 'edit']);
-  Route::post('products/update/{id}', [ProductController::class, 'update']);
-  Route::get('products/delete/{id}', [ProductController::class, 'delete']);
+  Route::get('products/{id}/show', [ProductController::class, 'show']);
+  Route::get('products/{id}/edit', [ProductController::class, 'edit']);
+  Route::post('products/{id}/update', [ProductController::class, 'update']);
+  Route::get('products/{id}/delete', [ProductController::class, 'delete']);
+  Route::get('/{id}/addImage', [ProductController::class, 'uploadImage']);
+  Route::post('/{id}/addImage', [ProductController::class, 'upload']);
 
   Route::get('discounts', [DiscountController::class, 'index']);
   Route::get('discounts/create', [DiscountController::class, 'create']);
@@ -110,9 +116,9 @@ Route::prefix('admins/')->name('admins.')->group(function () {
   Route::get('couriers', [CourierController::class, 'index']);
   Route::get('couriers/create', [CourierController::class, 'create']);
   Route::post('couriers/store', [CourierController::class, 'store']);
-  Route::get('couriers/edit/{id}', [CourierController::class, 'edit']);
-  Route::post('couriers/update/{id}', [CourierController::class, 'update']);
-  Route::get('couriers/delete/{id}', [CourierController::class, 'delete']);
+  Route::get('couriers/{id}/edit', [CourierController::class, 'edit']);
+  Route::post('couriers/{id}/update', [CourierController::class, 'update']);
+  Route::get('couriers/{id}/delete', [CourierController::class, 'delete']);
 
 });
 

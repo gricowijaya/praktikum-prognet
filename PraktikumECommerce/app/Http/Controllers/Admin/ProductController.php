@@ -13,13 +13,25 @@ use App\Models\Discount;
 use App\Models\Response;
 use Redirect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 class ProductController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth:admins']);
+    }
+    
     public function index(){
+        // $products = Product::all();
+        // $categories = ProductCategories::all();
+        // $discounts = Discount::all() ;
+
+        // dd($products);
+        // return view('pages.admins.product.productlist', compact('products','categories','discounts'));
+
         $products = DB::table('products')
-            ->select('products.*')            
-            ->orderby('id','desc')->paginate(10);
+            ->select('products.*')->paginate(5);
+        Paginator::useBootstrap();
         $categories = DB::table('product_categories')
             ->join('product_category_details','product_categories.id','=','product_category_details.category_id')
             ->select('product_categories.*','product_category_details.*')
@@ -36,6 +48,13 @@ class ProductController extends Controller
     }
 
     public function store(Request $request){
+        $this->validate($request,[
+            'product_name' => 'required|unique:products|max:100',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric|min:0',
+            'weight' => 'required|numeric|min:0',
+        ]);
+
         $product = new Product;
 
         $product->product_name = $request->product_name;
@@ -54,6 +73,10 @@ class ProductController extends Controller
             $category->product_id = $product_id;
             $category->save();
         }
+
+        $this->validate($request, [
+            'files.*' => 'required',
+        ]);
         
         $id = Product::orderBy('id','desc')->first()->id;
         if($id){
@@ -79,11 +102,19 @@ class ProductController extends Controller
         $categoryDetail = DB::table('product_category_details')
             ->select('category_id')
             ->where('product_id', '=', $id)->get();
-        $products = Product::find($id);
+        $products = Product::find($id); 
+        // $discount = Discount::all();
+        // dd($discount);
         return view('pages.admins.product.productedit', compact('category','categoryDetail','products'));
     }
 
     public function update(Request $request, $id){
+        $this->validate($request,[            
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric|min:0',
+            'weight' => 'required|numeric|min:0',
+        ]);
+
         $update = [
             'product_name' => $request->product_name,
             'price' => $request->price,
@@ -101,11 +132,22 @@ class ProductController extends Controller
             $categoryDetail->category_id = $category;
             $categoryDetail->save();
         }
+
+        $discount = new Discount;
+        $discount->percentage = $request->percentage;
+        $discount->id_product = $id;
+        $discount->start = $request->start;
+        $discount->end = $request->end;
+        $discount->save();
         return Redirect::to('/admins/products');
     }
 
     public function delete($id){
+        ProductCategorysDetails::where('product_id',$id)->delete();
+        Discount::where('id_product',$id)->delete();
+        ProductImages::where('product_id',$id)->delete();
         Product::where('id', $id)->delete();
+
         return Redirect::to('/admins/products');
     }
 
@@ -134,7 +176,7 @@ class ProductController extends Controller
 
     public function uploadImage($id){
         $products = Product::find($id);
-        return view('pages.admins.product.productimage', compact('product','id'));
+        return view('pages.admins.product.productaddimage', compact('products','id'));
     }
 
     public function upload(Request $request, $id){
@@ -154,20 +196,20 @@ class ProductController extends Controller
         return Redirect::to('/admins/products');
     }
 
-    public function discount($id){
-        $products = Product::find($id);
-        return view('pages.admins.product.dicountcreate', compact('products','id'));
-    }
+    // public function discount($id){
+    //     $products = Product::find($id);
+    //     return view('pages.admins.product.dicountcreate', compact('products','id'));
+    // }
 
-    public function addDiscount(Request $request, $id){
-        $discount = new Discount;
-        $discount->percentage = $request->percentage;
-        $discount->id_product = $id;
-        $discount->start = $request->start;
-        $discount->end = $request->end;
-        $discount->save();
+    // public function addDiscount(Request $request, $id){
+    //     $discount = new Discount;
+    //     $discount->percentage = $request->percentage;
+    //     $discount->id_product = $id;
+    //     $discount->start = $request->start;
+    //     $discount->end = $request->end;
+    //     $discount->save();
 
-        return Redirect::to('/admin/discounts/show/'.$id);
-    }
+    //     return Redirect::to('/admin/discounts/show/'.$id);
+    // }
 
 }

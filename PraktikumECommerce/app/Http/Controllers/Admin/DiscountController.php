@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\DB;
 
 class DiscountController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth:admins']);
+    }
+    
     public function edit($id){
         $where = array('id' => $id);
         $data['discount_info'] = Discount::where($where)->first();

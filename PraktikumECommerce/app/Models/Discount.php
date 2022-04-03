@@ -10,7 +10,7 @@ class Discount extends Model
 {
     use HasFactory;
 
-    protected $table = 'discount';
+    protected $table = 'discounts';
 
     protected $fillable = [
       'percentage',

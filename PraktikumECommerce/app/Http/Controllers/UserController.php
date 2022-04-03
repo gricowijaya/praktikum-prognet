@@ -63,7 +63,7 @@ class UserController extends Controller
         Auth::guard('users')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('users.login-index');
+        return redirect('/');
     }
 
     public function dashboard()

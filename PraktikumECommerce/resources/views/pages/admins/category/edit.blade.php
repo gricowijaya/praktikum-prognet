@@ -6,16 +6,22 @@
             <div class="grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <form class="form-signin" action="/admins/categories/update/{{$category->id}}" method="POST" enctype="multipart/form-data">
+                        <form class="form-signin" action="/admins/categories/{{$category->id}}/update" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="card-header">
                                 <h2>Edit Category</h2>
                                 <br>
-                                <label for="">Category Name :</label>
-                                <div class="input-group input-group-outline my-3">                                    
-                                    <input type="text" class="form-control" name="category_name" value="{{ $category->category_name }}">
-                                </div>
-                                <br>                          
+                                <div class="col-mb-4">
+                                    <div class="input-group input-group-static @error('category_name') is-invalid @enderror mb-4">
+                                        <label>Category Name :</label>
+                                        <input type="text" class="form-control" name="category_name" autofocus value="{{ $category->category_name }}">
+                                        @if (count($errors) > 0)                                    
+                                            @foreach ($errors->all() as $error)     
+                                                <p class="text-danger">{{$error}}</p>
+                                            @endforeach                                   
+                                        @endif      
+                                    </div>                                                      
+                                </div>            
                                 <button class="btn btn-primary" type="submit">
                                     Edit Category
                                 </button>                                                                   

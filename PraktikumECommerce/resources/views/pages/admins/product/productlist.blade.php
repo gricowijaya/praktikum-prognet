@@ -28,34 +28,32 @@
                                 <tbody>
                                     @foreach($products as $product)                                                                       
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $products->firstItem()+$loop->index }}</td>
                                         <td>{{ $product->product_name }}</td>
                                         <td>
-                                            @foreach($categories as $category)
+                                            @foreach($categories as $category) 
                                                 @if($product->id == $category->product_id)
                                                 <li>{{ $category->category_name }}</li>
                                                 @endif
                                             @endforeach
                                         </td>
-                                        <td>
-                                            <a
-                                                @foreach($discount as $discounts)
-                                                    @if($product->id == $discounts->id_product)
-                                                    @endif
-                                                @endforeach
-                                                class="btn-sm btn-danger"
-                                                href="discounts/{{$product->id}}">Diskon
-                                            </a>
+                                        <td>                                            
+                                            @foreach($discount as $discounts)
+                                                @if($product->id == $discounts->id_product)
+                                                <li>{{ $discounts->percentage }}%</li>
+                                                @endif
+                                            @endforeach                                             
                                         </td>
                                         <td style="align: center;">
-                                            <a href="products/show/{{$product->id}}" class="btn bg-gradient-info">Detail</a>
-                                            <a href="products/edit/{{$product->id}}" class="btn bg-gradient-warning">Edit</a>
-                                            <a href="/admins/products/delete/{{$product->id}}" class="btn bg-gradient-danger" onclick="return confirm('Apa yakin ingin menghapus data ini?')">Delete</a>
+                                            <a href="products/{{$product->id}}/show" class="btn bg-gradient-info">Detail</a>
+                                            <a href="products/{{$product->id}}/edit" class="btn bg-gradient-warning">Edit</a>
+                                            <a href="/admins/products/{{$product->id}}/delete" class="btn bg-gradient-danger" onclick="return confirm('Apa yakin ingin menghapus data ini?')">Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{ $products->links() }}
                         </div>
                     </div>
                 </div>

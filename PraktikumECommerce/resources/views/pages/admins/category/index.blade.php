@@ -11,10 +11,7 @@
                             <br>
                             <button type="button" class="btn bg-gradient-success">
                                 <a href="categories/create">Add Category</a>
-                            </button>
-                            <!-- <button type="button" class="btn bg-gradient-danger">
-                                <a href="">Trash</a>
-                            </button> -->
+                            </button>                            
                             <table class="table align-items-center">
                                 <thead>
                                     <tr class="text-left">
@@ -26,16 +23,17 @@
                                 <tbody>
                                     @foreach($categories as $category)                                    
                                     <tr class="">
-                                        <td>{{ $loop->iteration }}</td>
+                                        <th>{{ $categories->firstItem()+$loop->index }}</th>
                                         <td>{{ $category->category_name }}</td>
                                         <td style="align: center;">
-                                            <a href="categories/edit/{{$category->id}}" class="btn bg-gradient-warning">Edit</a>
-                                            <a href="/admins/categories/delete/{{$category->id}}" class="btn bg-gradient-danger" onclick="return confirm('Apa yakin ingin menghapus data ini?')">Delete</a>
+                                            <a href="categories/{{$category->id}}/edit" class="btn bg-gradient-warning">Edit</a>
+                                            <a href="/admins/categories/{{$category->id}}/delete" class="btn bg-gradient-danger" onclick="return confirm('Apa yakin ingin menghapus data ini?')">Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{ $categories->links() }}
                         </div>
                     </div>
                 </div>

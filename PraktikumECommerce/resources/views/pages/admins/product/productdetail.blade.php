@@ -7,12 +7,12 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table">
-                            <h2>List Products</h2>
+                            <h2>Detail Products</h2>
                             <br>                            
                             <table class="table table-striped table-hover">                                
                                 @foreach($products as $product)
                                 <tbody>                                                                                                           
-                                    <tr>
+                                    <tr> 
                                         <th>Nama Produk</th>
                                         <td>{{ $product->product_name }}</td>
                                     </tr>
@@ -44,20 +44,20 @@
                                             @endforeach                                            
                                         </td>
                                     </tr>                                        
-                                </tbody>
-                                @endforeach
-                            </table>
+                                </tbody>                                
+                            </table>                                                        
+                            <a href="products/{{$product->id}}/edit" class="btn bg-gradient-warning">Edit</a>
+                            <a href="/admins/{{$product->id}}/addImage" class="btn bg-gradient-info">Tambah Foto Produk</a>
+                            @endforeach                            
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="table">
-                            <div class="row">
-                                @forelse($image as $images)
-                                <div class="thumbnail">
-				                    <img class="img-fluid-left img-thumbnail" src="/uploads/product_images/{{$images->image_name}}" alt="light" style="width:200px; height:200px;">
-                                </div>
+                            <div class="column">
+                                @forelse($image as $images)                                                 
+                                    <img class="img-fluid-left img-thumbnail" src="/uploads/product_images/{{$images->image_name}}" alt="light" style="width:200px; height:200px;">                                                                                         
                                 @empty
-                                <h1>Tidak Ada Foto</h1>
+                                    <h1>Tidak Ada Foto</h1>
                                 @endforelse
                             </div>
                         </div>
