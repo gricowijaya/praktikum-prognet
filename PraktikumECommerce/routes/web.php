@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\CourierController;
 use App\Http\Controllers\HomeUnauthController;
 use App\Http\Controllers\HomeController; 
+use App\Http\Controllers\CartController; 
+use App\Http\Controllers\CheckoutController; 
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +29,8 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [HomeUnauthController::class, 'index']);
 Route::get('/product/{id}', [HomeUnauthController::class, 'show']);
 Route::get('/home', [HomeController::class, 'index']);
+Route::get('/cart', [CartController::class, 'index']);
+Route::get('/checkout', [CheckoutController::class, 'index']);
 
 
 // Route::get('/', function () {
@@ -104,15 +108,10 @@ Route::prefix('admins/')->name('admins.')->group(function () {
   Route::get('products/{id}/delete', [ProductController::class, 'delete']);
   Route::get('/{id}/addImage', [ProductController::class, 'uploadImage']);
   Route::post('/{id}/addImage', [ProductController::class, 'upload']);
+  Route::get('/{id}/deleteImage', [ProductController::class, 'deleteImage']);
 
   Route::get('discounts', [DiscountController::class, 'index']);
-  Route::get('discounts/create', [DiscountController::class, 'create']);
-  Route::get('discounts/{id}', [DiscountController::class, 'show']);
-  Route::post('discounts/store', [DiscountController::class, 'store']);
-  Route::get('discounts/edit/{id}', [DiscountController::class, 'edit']);
-  Route::post('discounts/update/{id}', [DiscountController::class, 'update']);
-  Route::get('discounts/delete/{id}', [DiscountController::class, 'delete']);
-
+  
   Route::get('couriers', [CourierController::class, 'index']);
   Route::get('couriers/create', [CourierController::class, 'create']);
   Route::post('couriers/store', [CourierController::class, 'store']);

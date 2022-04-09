@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title', 'Categories')
+@section('page1', 'Categories')
+@section('page2', 'Add Category')
 
 @section('content')   
     <div class="main-panel">

@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title', 'Discounts')
+@section('page1', 'Discounts')
+@section('page2', 'Discount List')
 
 @section('content')
     <div class="main-panel">
@@ -10,7 +13,7 @@
                             <h2>List Discounts</h2>
                             <br>
                             <button type="button" class="btn bg-gradient-success">
-                                <a href="products/create">Add Discount</a>
+                                <a href="products/create">Discount List</a>
                             </button>                            
                             <table class="table table-striped table-hover">
                                 <thead>

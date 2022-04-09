@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title', 'Products')
+@section('page1', 'Products')
+@section('page2', 'Edit Product')
 
 @section('content')   
     <div class="main-panel">
@@ -10,67 +13,74 @@
                             @csrf
                             <div class="card-header">  
                                 <h2>Edit Product</h2>
-                                <br>
-                                <label for="">Nama Produk :</label>
-                                <div class="input-group input-group-outline @error('product_name') is-invalid @enderror my-3">                                     
-                                    <input type="text" class="form-control" placeholder="Nama Produk" name="product_name" value="{{$products->product_name}}">
-                                </div>
-                                <label for="">Harga Satuan :</label>
-                                <div class="input-group input-group-outline @error('price') is-invalid @enderror my-3">                                    
-                                    <input type="text" class="form-control" placeholder="Harga Satuan" name="price" value="{{$products->price}}">
-                                </div>
-                                <label for="">Stok :</label>
-                                <div class="input-group input-group-outline @error('stock') is-invalid @enderror my-3">                                                                        <input type="text" class="form-control" placeholder="Stok" name="stock" value="{{$products->stock}}">
-                                </div>
-                                <label for="">Berat Produk :</label>
-                                <div class="input-group input-group-outline @error('weight') is-invalid @enderror my-3">                                    
-                                    <input type="text" class="form-control" placeholder="Berat Produk" name="weight" value="{{$products->weight}}">
-                                </div>
-                                <label for="">Kategori :</label>
-                                <div class="input-group input-group-outline my-3">                                    
-                                    <select name="category_id[]">
+                                <br><br>
+                                <div class="col-mb-4">
+                                    <div class="input-group input-group-static @error('product_name') is-invalid @enderror mb-4">
+                                        <label>Nama Produk :</label>
+                                        <input type="text" class="form-control" placeholder="Nama Produk" name="product_name" autofocus value="{{ $products->product_name }}">    
+                                    </div>                                                      
+                                </div>                                                                                
+                                <div class="col-mb-4">
+                                    <div class="input-group input-group-static @error('price') is-invalid @enderror my-3">                                    
+                                        <label>Harga Satuan :</label>
+                                        <input type="text" class="form-control" placeholder="Harga Satuan" name="price" value="{{ $products->price }}">
+                                    </div>
+                                </div>                                    
+                                <div class="col-mb-4">
+                                    <div class="input-group input-group-static @error('stock') is-invalid @enderror my-3">                                    
+                                        <label>Stok :</label>
+                                        <input type="text" class="form-control" placeholder="Stok" name="stock" value="{{ $products->stock }}">
+                                    </div>
+                                </div>                              
+                                <div class="col-mb-4">
+                                    <div class="input-group input-group-static @error('weight') is-invalid @enderror my-3">                                    
+                                        <label>Berat Produk :</label>
+                                        <input type="text" class="form-control" placeholder="Berat Produk" name="weight" value="{{ $products->weight }}">
+                                    </div>
+                                </div>                                 
+                                <div class="input-group input-group-static mb-4">
+                                    <label for="" class="ms-0">Kategori :</label>
+                                    <select class="form-control" name="category_id[]">
                                         @foreach($category as $categories)
-                                        <option
-                                            @foreach ($categoryDetail as $dataDetail)
-                                                @if ($dataDetail->category_id==$categories->id) selected="selected"
-                                                @endif
-                                            @endforeach
-                                            value="{{$categories->id}}">{{$categories->category_name}}
-                                        </option>
+                                            <option
+                                                @foreach ($categoryDetail as $dataDetail)
+                                                    @if ($dataDetail->category_id==$categories->id) selected="selected"
+                                                    @endif
+                                                @endforeach
+                                                value="{{$categories->id}}">{{$categories->category_name}}
+                                            </option>
                                         @endforeach
-                                    </select>
-                                </div>                                
-                                <label for="">Deskripsi :</label>
-                                <div class="mb-3 @error('description') is-invalid @enderror">
-                                    <textarea name="description" id="" cols="50" rows="5">{{$products->description}}</textarea>                                                    
+                                    </select>                                    
                                 </div>
-                                <label for="">Pilih Foto :</label>
-                                <div class="input-group input-group-outline @error('files[]') is-invalid @enderror my-3">                                    
-                                    <input type="file" class="form-control" placeholder="" name="files[]">
-                                </div>
-                                <label for="">Percentage :</label>
-                                <div class="input-group input-group-outline @error('percentage') is-invalid @enderror my-3">                                    
-                                    <input type="text" class="form-control" placeholder="" name="percentage">
-                                </div>
-                                <label for="">Start :</label>
-                                <div class="input-group input-group-outline @error('start') is-invalid @enderror my-3">                                    
-                                    <input type="date" class="form-control" placeholder="" name="start">
-                                </div>
-                                <label for="">End :</label>
-                                <div class="input-group input-group-outline @error('end') is-invalid @enderror my-3">                                    
-                                    <input type="date" class="form-control" placeholder="" name="end">
-                                </div>
+                                <label class="ms-0"for="">Deskripsi :</label>                                
+                                <div class="input-group input-group-dynamic">                                    
+                                    <textarea class="form-control" rows="5" placeholder="Deskripsi" name="description">{{$products->description}}</textarea>
+                                </div> 
                                 <br>
+                                <div class="col-mb-4">
+                                    <div class="input-group input-group-static @error('percentage') is-invalid @enderror my-3">                                    
+                                        <label>Berat Produk :</label>
+                                        <input type="text" class="form-control" placeholder="Persentase" name="percentage">
+                                    </div>
+                                </div>
+                                <div class="input-group input-group-static @error('start') is-invalid @enderror my-3">
+                                    <label>Start :</label>
+                                    <input type="date" class="form-control" name="start">
+                                </div>  
+                                <div class="input-group input-group-static @error('end') is-invalid @enderror my-3">
+                                    <label>End :</label>
+                                    <input type="date" class="form-control" name="end">
+                                </div>                                                                                      
                                 @if (count($errors) > 0)                                    
                                     @foreach ($errors->all() as $error)     
                                         <p class="text-danger">{{$error}}</p>
                                     @endforeach                                   
                                 @endif
+                                <br>                                                        
                                 <div>
                                     <button class="btn btn-primary" type="submit">
                                         Edit Product
-                                    </button>                                                                   
-
+                                    </button>                                                                  
                                 </div>                          
                             </div>
                         </form>

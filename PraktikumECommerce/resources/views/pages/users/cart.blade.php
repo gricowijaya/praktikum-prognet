@@ -1,7 +1,6 @@
 @extends('layouts.user-layout.app')
 
-@section('content')
-    
+@section('content')    
 <div class="container-fluid pt-5">
         <div class="row px-xl-5">
             <div class="col-lg-8 table-responsive mb-5">
@@ -152,13 +151,10 @@
                             <h5 class="font-weight-bold">Total</h5>
                             <h5 class="font-weight-bold">$160</h5>
                         </div>
-                        <button class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</button>
+                        <a href="/checkout" class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-
-    
+    </div>    
 @endsection

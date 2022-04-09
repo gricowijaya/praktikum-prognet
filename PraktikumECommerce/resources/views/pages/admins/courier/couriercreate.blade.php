@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title', 'Couriers')
+@section('page1', 'Couriers')
+@section('page2', 'Add Courier')
 
 @section('content')   
     <div class="main-panel">

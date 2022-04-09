@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title', 'Products')
+@section('page1', 'Products')
+@section('page2', 'Add Product')
 
 @section('content')   
     <div class="main-panel">
@@ -10,50 +13,59 @@
                             @csrf
                             <div class="card-header">
                                 <h2>Add Product</h2>
-                                <br>
-                                <label for="">Nama Produk :</label>
-                                <div class="input-group input-group-outline @error('product_name') is-invalid @enderror my-3">                                     
-                                    <input type="text" class="form-control" placeholder="Nama Produk" name="product_name" value="{{ old('product_name') }}">
-                                </div>
-                                <label for="">Harga Satuan :</label>
-                                <div class="input-group input-group-outline @error('price') is-invalid @enderror my-3">                                    
-                                    <input type="text" class="form-control" placeholder="Harga Satuan" name="price" value="{{ old('price') }}">
-                                </div>
-                                <label for="">Stok :</label>
-                                <div class="input-group input-group-outline @error('stock') is-invalid @enderror my-3">                                    
-                                    <input type="text" class="form-control" placeholder="Stok" name="stock" value="{{ old('stock') }}">
-                                </div>
-                                <label for="">Berat Produk :</label>
-                                <div class="input-group input-group-outline @error('weight') is-invalid @enderror my-3">                                    
-                                    <input type="text" class="form-control" placeholder="Berat Produk" name="weight" value="{{ old('weight') }}">
-                                </div>
-                                <label for="">Kategori :</label>
-                                <div class="input-group input-group-outline my-3">                                    
-                                    <select name="category_id[]">
+                                <br><br>
+                                <div class="col-mb-4">
+                                    <div class="input-group input-group-static @error('product_name') is-invalid @enderror mb-4">
+                                        <label>Nama Produk :</label>
+                                        <input type="text" class="form-control" placeholder="Nama Produk" name="product_name" autofocus value="{{ old('product_name') }}">    
+                                    </div>                                                      
+                                </div>                                                                                
+                                <div class="col-mb-4">
+                                    <div class="input-group input-group-static @error('price') is-invalid @enderror my-3">                                    
+                                        <label>Harga Satuan :</label>
+                                        <input type="text" class="form-control" placeholder="Harga Satuan" name="price" value="{{ old('price') }}">
+                                    </div>
+                                </div>                                    
+                                <div class="col-mb-4">
+                                    <div class="input-group input-group-static @error('stock') is-invalid @enderror my-3">                                    
+                                        <label>Stok :</label>
+                                        <input type="text" class="form-control" placeholder="Stok" name="stock" value="{{ old('stock') }}">
+                                    </div>
+                                </div>                              
+                                <div class="col-mb-4">
+                                    <div class="input-group input-group-static @error('weight') is-invalid @enderror my-3">                                    
+                                        <label>Berat Produk :</label>
+                                        <input type="text" class="form-control" placeholder="Berat Produk" name="weight" value="{{ old('weight') }}">
+                                    </div>
+                                </div>                                 
+                                <div class="input-group input-group-static mb-4">
+                                    <label for="" class="ms-0">Kategori :</label>
+                                    <select class="form-control" name="category_id[]">
                                         @foreach($categories as $category)
-                                        <option value="{{$category->id}}">{{$category->category_name}}</option>
+                                            <option value="{{$category->id}}">{{$category->category_name}}</option>
                                         @endforeach
-                                    </select>
-                                </div>                                
-                                <label for="">Deskripsi :</label>
-                                <div class="mb-3 @error('description') is-invalid @enderror">
-                                    <textarea name="description" id="" cols="50" rows="5">{{ old('description') }}</textarea>                                                    
+                                    </select>                                    
                                 </div>
-                                <label for="">Pilih Foto :</label>
-                                <div class="input-group input-group-outline @error('files[]') is-invalid @enderror my-3">                                    
-                                    <input type="file" class="form-control" placeholder="" name="files[]">
+                                <label class="ms-0"for="">Deskripsi :</label>                                
+                                <div class="input-group input-group-dynamic">                                    
+                                    <textarea class="form-control" rows="5" placeholder="Deskripsi" name="description">{{ old('description') }}</textarea>
+                                </div> 
+                                <br>                                             
+                                <div class="input-group mb-4">
+                                    <label for="">Pilih Foto :</label>
+                                    <div class="input-group input-group-outline @error('files[]') is-invalid @enderror my-3">                                    
+                                        <input type="file" class="form-control" placeholder="" name="files[]" multiple>
+                                    </div>
                                 </div>
                                 @if (count($errors) > 0)                                    
                                     @foreach ($errors->all() as $error)     
                                         <p class="text-danger">{{$error}}</p>
                                     @endforeach                                   
-                                @endif
-                                
+                                @endif                                
                                 <div>
                                     <button class="btn btn-primary" type="submit">
                                         Add Product
-                                    </button>                                                                   
-
+                                    </button>                                                                  
                                 </div>                          
                             </div>
                         </form>

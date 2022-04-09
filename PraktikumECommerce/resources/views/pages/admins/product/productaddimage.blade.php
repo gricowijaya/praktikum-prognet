@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title', 'Products')
+@section('page1', 'Products')
+@section('page2', 'Add Product Images')
 
 @section('content')   
     <div class="main-panel">

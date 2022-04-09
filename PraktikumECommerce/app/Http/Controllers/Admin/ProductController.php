@@ -13,6 +13,7 @@ use App\Models\Discount;
 use App\Models\Response;
 use Redirect;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\Paginator;
 
 class ProductController extends Controller
@@ -78,22 +79,22 @@ class ProductController extends Controller
             'files.*' => 'required',
         ]);
         
-        $id = Product::orderBy('id','desc')->first()->id;
+        $id = Product::orderBy('id','desc')->first()->id;       
         if($id){
             $files = [];
             foreach($request->file('files') as $file){
                 if($file->isValid()){
                     $nama_image = time()."_".$file->getClientOriginalName();
-                    $folder = 'uploads/product_images';
-                    $file->move($folder,$nama_image);
+                    Storage::putFileAs('public', $file, $nama_image);
                     $files[] = [
                         'product_id' => $id,
-                        'image_name' => $nama_image,
+                        'image_name' => 'storage/' . $nama_image,
                     ];
                 }
             }
             ProductImages::insert($files);
         }
+
         return Redirect::to('/admins/products');
     }
 
@@ -138,7 +139,10 @@ class ProductController extends Controller
         $discount->id_product = $id;
         $discount->start = $request->start;
         $discount->end = $request->end;
-        $discount->save();
+        if(!empty($request->percentage)) {
+            $discount->save();    
+        }
+        
         return Redirect::to('/admins/products');
     }
 
@@ -180,12 +184,15 @@ class ProductController extends Controller
     }
 
     public function upload(Request $request, $id){
+        $this->validate($request, [
+            'files.*' => 'required',
+        ]);   
+        
         $files = [];
-        foreach ($request->file('files') as $file){
+        foreach($request->file('files') as $file){
             if($file->isValid()){
                 $nama_image = time()."_".$file->getClientOriginalName();
-                $folder = 'uploads/product_images';
-                $file->move($folder,$nama_image);
+                Storage::putFileAs('public', $file, $nama_image);
                 $files[] = [
                     'product_id' => $id,
                     'image_name' => $nama_image,
@@ -193,23 +200,14 @@ class ProductController extends Controller
             }
         }
         ProductImages::insert($files);
+        
         return Redirect::to('/admins/products');
     }
 
-    // public function discount($id){
-    //     $products = Product::find($id);
-    //     return view('pages.admins.product.dicountcreate', compact('products','id'));
-    // }
-
-    // public function addDiscount(Request $request, $id){
-    //     $discount = new Discount;
-    //     $discount->percentage = $request->percentage;
-    //     $discount->id_product = $id;
-    //     $discount->start = $request->start;
-    //     $discount->end = $request->end;
-    //     $discount->save();
-
-    //     return Redirect::to('/admin/discounts/show/'.$id);
-    // }
-
+    public function deleteImage($id){
+        $categories = ProductImages::find($id)->image_name;
+        Storage::disk('local')->delete('public/'.$categories);
+        ProductImages::where('id',$id)->delete();
+        return redirect()->back(); 
+    }
 }

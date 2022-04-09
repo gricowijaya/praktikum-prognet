@@ -49,7 +49,11 @@
                             </button>
                         </div>
                     </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                    @if (is_null(Auth::user()))
+                        <a href="/login"class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a>
+                    @else
+                        <a href="/cart"class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a>
+                    @endif                    
                 </div>                
             </div>
         </div>

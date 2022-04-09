@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProductCategories;
+use App\Models\ProductCategorysDetails;
 use Illuminate\Http\Request;
 use Redirect;
 use Illuminate\Support\Facades\DB;
@@ -54,6 +55,7 @@ class CategoryController extends Controller
     }
 
     public function delete($id){
+        ProductCategorysDetails::where('category_id',$id)->delete();
         $categories = ProductCategories::find($id);
         $categories->delete();
         return Redirect::to('/admins/categories');
