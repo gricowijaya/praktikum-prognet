@@ -35,7 +35,7 @@ class CategoryController extends Controller
             'category_name' => $request->category_name
         ]);
         $category->save();
-        return Redirect::to('/admins/categories');
+        return Redirect::to('/admins/categories')->with(['success' => 'Berhasil menambahkan kategori']);
     }
 
     public function edit($id){
@@ -51,14 +51,14 @@ class CategoryController extends Controller
         $category->update([
             'category_name' => $request->category_name
         ]);
-        return Redirect::to('/admins/categories');
+        return Redirect::to('/admins/categories')->with(['success' => 'Berhasil mengedit kategori']);
     }
 
     public function delete($id){
         ProductCategorysDetails::where('category_id',$id)->delete();
         $categories = ProductCategories::find($id);
         $categories->delete();
-        return Redirect::to('/admins/categories');
+        return Redirect::to('/admins/categories')->with(['error' => 'Berhasil menghapus kategori']);
     }
 
 }

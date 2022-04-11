@@ -1,4 +1,5 @@
 @extends('layouts.user-layout.app')
+@section('title', 'Cart')
 
 @section('content')    
 <div class="container-fluid pt-5">
@@ -123,15 +124,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-lg-4">
-                <form class="mb-5" action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control p-4" placeholder="Coupon Code">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary">Apply Coupon</button>
-                        </div>
-                    </div>
-                </form>
+            <div class="col-lg-4">                
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
                         <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
@@ -151,7 +144,7 @@
                             <h5 class="font-weight-bold">Total</h5>
                             <h5 class="font-weight-bold">$160</h5>
                         </div>
-                        <a href="/checkout" class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
+                        <a href="/checkout" class="btn btn-block btn-primary my-3 py-3 bg-shopee text-white">Proceed To Checkout</a>
                     </div>
                 </div>
             </div>

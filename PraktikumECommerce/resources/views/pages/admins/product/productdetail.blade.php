@@ -68,20 +68,22 @@
                                         <h2 class="mb-0">Product Images</h2>
                                 </div>
                                 <div class="col-6 text-end align-items-center">
-                                    <a class="btn bg-gradient-success mb-0" href="/admins/{{$product->id}}/addImage"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add Product</a>
+                                    <a class="btn bg-gradient-success mb-0" href="/admins/{{$product->id}}/addImage"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add Image</a>
                                 </div>
                             </div>
                             <br>
                             <div class="row">                                
                                 @forelse($image as $images)         
-                                    <div class="col-md-1">                                        
+                                    <div class="col-md-2">                                        
                                         <div class="thumbnail">
                                             <img class="img-fluid-left img-thumbnail" src="{{ asset($images->image_name) }}" alt="light" style="width:200px; height:200px;">                                                                
                                         </div>		
                                         <a href="/admins/{{$images->id}}/deleteImage" class="btn bg-gradient-danger" onclick="return confirm('Apa yakin ingin menghapus gambar ini?')">Hapus</a>
                                     </div>		                                                                                     
                                 @empty
-                                    <h1>Tidak Ada Foto</h1>
+                                <div class="col-6 align-items-center">
+                                    <h3 class="mb-0">Tidak Ada Foto</h3>
+                                </div>
                                 @endforelse                                
                             </div>
                         </div><br><br>

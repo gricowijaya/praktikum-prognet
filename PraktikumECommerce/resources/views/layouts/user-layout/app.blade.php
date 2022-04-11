@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>EShopper - Bootstrap Shop Template</title>
+    <title>EShopper - @yield('title')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -29,11 +29,11 @@
 
 <body>
     <!-- Topbar Start -->
-    <div class="container-fluid">        
+    <div class="container-fluid bg-shopee">        
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a href="" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                    <h1 class="m-0 display-5 font-weight-semi-bold text-white"><span class="text-white font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left">
@@ -41,7 +41,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search for products">
                         <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
+                            <span class="input-group-text bg-transparent text-white">
                                 <i class="fa fa-search"></i>
                             </span>
                         </div>
@@ -50,12 +50,12 @@
             </div>
             <div class="col-lg-3 col-6 text-right">
                 <a href="" class="btn border">
-                    <i class="fas fa-heart text-primary"></i>
-                    <span class="badge">0</span>
+                    <i class="fas fa-bell text-white"></i>
+                    <span class="badge text-white">0</span>
                 </a>
                 <a href="" class="btn border">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">0</span>
+                    <i class="fas fa-shopping-cart text-white"></i>
+                    <span class="badge text-white">0</span>
                 </a>
             </div>
         </div>
@@ -64,7 +64,7 @@
 
 
     <!-- Navbar Start -->
-    <div class="container-fluid mb-5">
+    <div class="container-fluid mb-3 bg-shopee">
         @include('layouts.user-layout.usernav')
     </div>
     <!-- Navbar End -->
@@ -81,7 +81,7 @@
     <!-- Products End -->    
 
     <!-- Footer Start -->
-    <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
+    <div class="container-fluid  text-dark mt-5 pt-5 bg-shopee">
         @include('layouts.user-layout.userfooter')    
     </div>
     <!-- Footer End -->

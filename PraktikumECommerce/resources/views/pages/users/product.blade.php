@@ -1,4 +1,5 @@
 @extends('layouts.user-layout.app')
+@section('title', 'Product Detail')
 
 @section('content')
     <div class="container-fluid py-5">
@@ -7,8 +8,8 @@
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner border">
                         @foreach($product->product_images as $image)
-                            <div class="carousel-item active">                            
-                                <img class="w-100 h-100" src="/uploads/product_images/{{$image->image_name}}" alt="Image">                                                        
+                            <div class="carousel-item {{$loop->iteration == 1 ? 'active' : ''}}">                            
+                                <img class="h-50 w-50 center" src="{{ asset($image->image_name) }}" alt="Image" style="width: 350px; height: 350px;">                                                        
                             </div>                        
                         @endforeach
                     </div>
@@ -18,6 +19,7 @@
                     <a class="carousel-control-next" href="#product-carousel" data-slide="next">
                         <i class="fa fa-2x fa-angle-right text-dark"></i>
                     </a>
+                    
                 </div>
             </div>
 
@@ -25,11 +27,11 @@
                 <h3 class="font-weight-semi-bold">{{ $product->product_name }}</h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star"></small>
-                        <small class="fas fa-star-half-alt"></small>
-                        <small class="far fa-star"></small>
+                        <small class="fas fa-star text-shopee"></small>
+                        <small class="fas fa-star text-shopee"></small>
+                        <small class="fas fa-star text-shopee"></small>
+                        <small class="fas fa-star-half-alt text-shopee"></small>
+                        <small class="far fa-star text-shopee"></small>
                     </div>
                     <small class="pt-1">(50 Reviews)</small>
                 </div>
@@ -38,21 +40,21 @@
                                 <div class="d-flex align-items-center mb-4 pt-2">
                     <div class="input-group quantity mr-3" style="width: 130px;">
                         <div class="input-group-btn">
-                            <button class="btn btn-primary btn-minus" >
+                            <button class="btn btn-primary btn-minus bg-shopee" >
                             <i class="fa fa-minus"></i>
                             </button>
                         </div>
                         <input type="text" class="form-control bg-secondary text-center" value="1">
                         <div class="input-group-btn">
-                            <button class="btn btn-primary btn-plus">
+                            <button class="btn btn-primary btn-plus bg-shopee">
                                 <i class="fa fa-plus"></i>
                             </button>
                         </div>
                     </div>
                     @if (is_null(Auth::user()))
-                        <a href="/login"class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a>
+                        <a href="/login"class="btn btn-primary px-3 bg-shopee"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a>
                     @else
-                        <a href="/cart"class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a>
+                        <a href="/cart"class="btn btn-primary px-3 bg-shopee"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</a>
                     @endif                    
                 </div>                
             </div>
@@ -114,7 +116,7 @@
                                         <input type="email" class="form-control" id="email">
                                     </div>
                                     <div class="form-group mb-0">
-                                        <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+                                        <input type="submit" value="Leave Your Review" class="btn btn-primary bg-shopee px-3 text-white">
                                     </div>
                                 </form>
                             </div>

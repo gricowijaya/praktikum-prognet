@@ -1,4 +1,5 @@
 @extends('layouts.user-layout.app')
+@section('title', 'Checkout')
 
 @section('content')
 <div class="container-fluid pt-5">
@@ -178,7 +179,7 @@
                     </div>
                 </div>
                 <div class="card-footer border-secondary bg-transparent">
-                    <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Place Order</button>
+                    <button class="btn btn-lg btn-block bg-shopee text-white font-weight-bold my-3 py-3">Place Order</button>
                 </div>
             </div>
         </div>
