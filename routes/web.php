@@ -31,6 +31,7 @@ Route::get('/product/{id}', [HomeUnauthController::class, 'show']);
 Route::get('/home', [HomeController::class, 'index']);
 Route::get('/cart', [CartController::class, 'index']);
 Route::get('/checkout', [CheckoutController::class, 'index']);
+Route::post('/cart', [CartController::class, 'store']);
 
 
 // Route::get('/', function () {
