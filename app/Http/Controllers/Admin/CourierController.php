@@ -34,7 +34,7 @@ class CourierController extends Controller
             'courier' => $request->courier
         ]);
         $couriers->save();
-        return Redirect::to('/admins/couriers');
+        return Redirect::to('/admins/couriers')->with(['success' => 'Berhasil menambahkan kurir']);
     }
 
     public function edit($id){
@@ -51,12 +51,12 @@ class CourierController extends Controller
         $courier->update([
             'courier' => $request->courier
         ]);
-        return Redirect::to('/admins/couriers');
+        return Redirect::to('/admins/couriers')->with(['success' => 'Berhasil mengedit kurir']);
     }
 
     public function delete($id){
         $couriers = Couriers::find($id);
         $couriers->delete();
-        return Redirect::to('/admins/couriers');
+        return Redirect::to('/admins/couriers')->with(['error' => 'Berhasil menghapus kurir']);
     }
 }

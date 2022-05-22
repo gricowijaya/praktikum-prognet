@@ -95,7 +95,7 @@ class ProductController extends Controller
             ProductImages::insert($files);
         }
 
-        return Redirect::to('/admins/products');
+        return Redirect::to('/admins/products')->with(['success' => 'Berhasil menambahkan produk']);
     }
 
     public function edit($id){
@@ -143,7 +143,7 @@ class ProductController extends Controller
             $discount->save();    
         }
         
-        return Redirect::to('/admins/products');
+        return Redirect::to('/admins/products')->with(['success' => 'Berhasil mengedit produk']);
     }
 
     public function delete($id){
@@ -152,7 +152,7 @@ class ProductController extends Controller
         ProductImages::where('product_id',$id)->delete();
         Product::where('id', $id)->delete();
 
-        return Redirect::to('/admins/products');
+        return Redirect::to('/admins/products')->with(['error' => 'Berhasil menghapus produk']);
     }
 
     public function show($id){
@@ -195,7 +195,7 @@ class ProductController extends Controller
                 Storage::putFileAs('public', $file, $nama_image);
                 $files[] = [
                     'product_id' => $id,
-                    'image_name' => $nama_image,
+                    'image_name' => 'storage/' . $nama_image,
                 ];
             }
         }
@@ -206,7 +206,7 @@ class ProductController extends Controller
 
     public function deleteImage($id){
         $categories = ProductImages::find($id)->image_name;
-        Storage::disk('local')->delete('public/'.$categories);
+        Storage::disk('local')->delete('public/storage/'.$categories);
         ProductImages::where('id',$id)->delete();
         return redirect()->back(); 
     }
