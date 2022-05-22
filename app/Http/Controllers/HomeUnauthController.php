@@ -23,7 +23,6 @@ class HomeUnauthController extends Controller
     public function show($id){
         $product = Product::with('product_images','product_category_details','product_categories')
             ->where('id','=',$id)->first();
-            // dd($product);
         return view('pages.users.product', ['product' => $product]); 
     }
 }
