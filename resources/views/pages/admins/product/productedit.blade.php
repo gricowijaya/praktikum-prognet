@@ -59,7 +59,7 @@
                                 <br>
                                 <div class="col-mb-4">
                                     <div class="input-group input-group-static @error('percentage') is-invalid @enderror my-3">                                    
-                                        <label>Berat Produk :</label>
+                                        <label>Persentase Diskon :</label>
                                         <input type="text" class="form-control" placeholder="Persentase" name="percentage">
                                     </div>
                                 </div>
