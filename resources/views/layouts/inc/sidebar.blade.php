@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white {{ Request::is('admins/dashboard*') ? 'active active bg-gradient-primary' : '' }} " href="/admins/dashboard">
+          <a class="nav-link text-white {{ Request::is('admins/dashboard*') ? 'active bg-gradient-primary' : '' }} " href="/admins/dashboard">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -17,7 +17,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white {{ Request::is('admins/categories*') ? 'active active bg-gradient-primary' : '' }} " href="/admins/categories">
+          <a class="nav-link text-white {{ Request::is('admins/categories*') ? 'active bg-gradient-primary' : '' }} " href="/admins/categories">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">category</i>
             </div>
@@ -25,7 +25,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white {{ Request::is('admins/products*') ? 'active active bg-gradient-primary' : '' }} " href="/admins/products">
+          <a class="nav-link text-white {{ Request::is('admins/products*') ? 'active bg-gradient-primary' : '' }} " href="/admins/products">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">local_mall</i>
             </div>
@@ -33,7 +33,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white {{ Request::is('admins/couriers*') ? 'active active bg-gradient-primary' : '' }} " href="/admins/couriers">
+          <a class="nav-link text-white {{ Request::is('admins/couriers*') ? 'active bg-gradient-primary' : '' }} " href="/admins/couriers">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">local_shipping</i>
             </div>
@@ -41,7 +41,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white {{ Request::is('admins/transactions*') ? 'active active bg-gradient-primary' : '' }} " href="/admins/transactions">
+          <a class="nav-link text-white {{ Request::is('admins/transactions*') ? 'active bg-gradient-primary' : '' }} " href="/admins/transactions">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">local_grocery_store</i>
             </div>
