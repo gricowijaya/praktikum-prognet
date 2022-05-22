@@ -91,14 +91,13 @@
         if (button.hasClass('btn-plus')) {
             var newVal = parseFloat(oldValue) + 1;
         } else {
-            if (oldValue > 1) {
+            if (oldValue > 0) {
                 var newVal = parseFloat(oldValue) - 1;
             } else {
-                newVal = parseFloat(oldValue);
+                newVal = 0;
             }
         }
         button.parent().parent().find('input').val(newVal);
-        $("#qty_final").val(newVal);
     });
     
 })(jQuery);
