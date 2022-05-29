@@ -12,6 +12,14 @@ class Admin_Notification extends Model
 
     protected $table = 'admin_notifications';
 
+    protected $guarded = 'id';
+    protected $fillable = [
+      'type',
+      'notifiable_type',
+      'notifiable_id',
+      'data'
+    ];
+
     public function admins() { 
       return $this->belongsTo(Admins::class);
     }

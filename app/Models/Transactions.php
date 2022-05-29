@@ -13,11 +13,14 @@ class Transactions extends Model
 
     protected $table = 'transactions';
 
+    protected $fillable = ['timeout', 'address', 'regency', 'province', 'total',
+    'shipping_cost', 'sub_total', 'user_id', 'courier_id', 'proof_of_payment', 'status'];
+
     public function couriers() { 
-      return $this->hasMany(Couriers::class);
+      return $this->belongsTo(Couriers::class, 'courier_id');
     }
 
     public function user() { 
-      return $this->hasMany(User::class);
+      return $this->belongsTo(User::class);
     }
 }

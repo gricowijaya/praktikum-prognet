@@ -10,7 +10,9 @@ class Response extends Model
 {
     use HasFactory;
 
-    protected $table = 'responses';
+    protected $table = 'response';
+
+    protected $fillable = ['review_id', 'admin_id', 'content'];
     
     public function admins() { 
       return $this->belongsTo(Admins::class);

@@ -4,17 +4,23 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Admin_Notification;
 use App\Models\ProductCategories;
 use App\Models\ProductCategorysDetails;
 use App\Models\ProductImages;
 use App\Models\ProductReviews;
 use App\Models\Product;
+use App\Models\UserNotifications;
 use App\Models\Discount;
 use App\Models\Response;
-use Redirect;
+use Illuminate\Support\Facades\Redirect;
+use App\Models\Transactions;
+// use Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\Paginator;
+
+use function PHPUnit\Framework\returnSelf;
 
 class ProductController extends Controller
 {
@@ -40,7 +46,14 @@ class ProductController extends Controller
         $discount = DB::table('discounts')
             ->select('discounts.*')
             ->get();
-        return view('pages.admins.product.productlist', compact('products','categories','discount'));
+        
+        // $admin_notification = DB::table('admin_notifications')
+        //     ->select('admin_notifications.*')
+        //     ->get();
+
+        $admin_notifications = Admin_Notification::all();
+
+        return view('pages.admins.product.productlist', compact('products','categories','discount', 'admin_notifications'));
     }
 
     public function create(){
@@ -95,7 +108,7 @@ class ProductController extends Controller
             ProductImages::insert($files);
         }
 
-        return Redirect::to('/admins/products')->with(['success' => 'Berhasil menambahkan produk']);
+        return Redirect::to('/admins/products');
     }
 
     public function edit($id){
@@ -143,7 +156,7 @@ class ProductController extends Controller
             $discount->save();    
         }
         
-        return Redirect::to('/admins/products')->with(['success' => 'Berhasil mengedit produk']);
+        return Redirect::to('/admins/products');
     }
 
     public function delete($id){
@@ -152,7 +165,7 @@ class ProductController extends Controller
         ProductImages::where('product_id',$id)->delete();
         Product::where('id', $id)->delete();
 
-        return Redirect::to('/admins/products')->with(['error' => 'Berhasil menghapus produk']);
+        return Redirect::to('/admins/products');
     }
 
     public function show($id){
@@ -195,7 +208,7 @@ class ProductController extends Controller
                 Storage::putFileAs('public', $file, $nama_image);
                 $files[] = [
                     'product_id' => $id,
-                    'image_name' => 'storage/' . $nama_image,
+                    'image_name' => $nama_image,
                 ];
             }
         }
@@ -206,8 +219,28 @@ class ProductController extends Controller
 
     public function deleteImage($id){
         $categories = ProductImages::find($id)->image_name;
-        Storage::disk('local')->delete('public/storage/'.$categories);
+        Storage::disk('local')->delete('public/'.$categories);
         ProductImages::where('id',$id)->delete();
         return redirect()->back(); 
+    }
+
+    public function response($id, Request $request){
+
+        $user = Transactions::find($id)->user_id;
+        Response::create([
+            'review_id' => $id,
+            'admin_id' => auth()->id(),
+            'content' => $request->content
+        ]);
+
+        UserNotifications::create([
+            'type' => "notifikasi",
+            'notifiable_type' => "notifikasi_balasan_produk",
+            'notifiable_id' => $user,
+            'data' => "Review anda sudah terbalaskan",
+        ]);
+        
+
+        return back();
     }
 }
