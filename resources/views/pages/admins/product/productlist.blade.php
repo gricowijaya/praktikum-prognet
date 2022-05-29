@@ -4,22 +4,6 @@
 @section('page2', 'Product List')
 
 @section('content')
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-dismissible text-white" role="alert">
-            <span class="text-sm">{{ $message }}</span>
-            <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-    @if ($message = Session::get('error'))
-        <div class="alert alert-danger alert-dismissible text-white" role="alert">
-            <span class="text-sm">{{ $message }}</span>
-            <button type="button" class="btn-close text-lg py-3 opacity-10" data-bs-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="grid-margin stretch-card">
@@ -32,6 +16,7 @@
                                 </div>
                                 <div class="col-6 text-end align-items-center">
                                     <a class="btn bg-gradient-success mb-0" href="products/create"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add Product</a>
+                                    <a id="liveToastBtn" class="btn bg-gradient-success mb-0" ></i>&nbsp;&nbsp;Cek Notifikasi</a>
                                 </div>
                             </div>
                             <br>
@@ -69,13 +54,27 @@
                                                 <div class="d-flex align-items-center">
                                                     <a href="products/{{$product->id}}/show" class="m-1 btn bg-gradient-info"><i class="material-icons text-sm me-2">visibility</i>Detail</a>
                                                     <a href="products/{{$product->id}}/edit" class="m-1 btn bg-gradient-warning"><i class="material-icons text-sm me-2">edit</i>Edit</a>
-                                                    <a href="/admins/products/{{$product->id}}/delete" class="m-1 btn bg-gradient-danger" onclick="return confirm('Apa yakin ingin menghapus data ini?')"><i class="material-icons text-sm me-2">delete</i>Delete</a>
+                                                    <a href="/admins/products/{{$product->id}}/delete" class="m-1 btn bg-gradient-danger" onclick="return confirx('Apa yakin ingin menghapus data ini?')"><i class="material-icons text-sm me-2">delete</i>Delete</a>
                                                 </div>
                                             </td>                
                                         </tr>
                                         @endforeach      
                                     </tbody>
                                 </table>
+                            </div>
+
+                            <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                            @foreach ($admin_notifications as $admin_notification)
+                                <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                    <div class="toast-header">
+                                    <strong class="me-auto">Notifikasi Admin</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                    </div>
+                                        <div class="toast-body">
+                                            {{$admin_notification->data}}
+                                        </div>
+                                </div>
+                            @endforeach
                             </div>
                             {{ $products->links() }}
                         </div>
@@ -84,4 +83,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const toastTrigger = document.getElementById('liveToastBtn')
+        const toastLiveExample = document.getElementById('liveToast')
+        if (toastTrigger) {
+        toastTrigger.addEventListener('click', () => {
+            const toast = new bootstrap.Toast(toastLiveExample)
+
+            toast.show()
+        })
+        }
+    </script>
 @endsection                            

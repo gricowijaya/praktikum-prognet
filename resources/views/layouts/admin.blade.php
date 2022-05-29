@@ -95,253 +95,10 @@
   <script src="{{asset('style/assets/js/plugins/perfect-scrollbar.min.js')}}"></script>
   <script src="{{asset('style/assets/js/plugins/smooth-scrollbar.min.js')}}"></script>
   <script src="{{asset('style/assets/js/plugins/chartjs.min.js')}}"></script>
-  <script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
+  <script src="{{asset('style/assets/js/Chart.min.js')}}"></script>
+  <script src="{{asset('style/assets/js/Chart.roundedBarCharts.js')}}"></script>
 
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["M", "T", "W", "T", "F", "S", "S"],
-        datasets: [{
-          label: "Sales",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "rgba(255, 255, 255, .8)",
-          data: [50, 20, 10, 22, 50, 10, 40],
-          maxBarThickness: 6
-        }, ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 500,
-              beginAtZero: true,
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-              color: "#fff"
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-
-
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-    new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Mobile apps",
-          tension: 0,
-          borderWidth: 0,
-          pointRadius: 5,
-          pointBackgroundColor: "rgba(255, 255, 255, .8)",
-          pointBorderColor: "transparent",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderWidth: 4,
-          backgroundColor: "transparent",
-          fill: true,
-          data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
-          maxBarThickness: 6
-
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-
-    var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
-
-    new Chart(ctx3, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Mobile apps",
-          tension: 0,
-          borderWidth: 0,
-          pointRadius: 5,
-          pointBackgroundColor: "rgba(255, 255, 255, .8)",
-          pointBorderColor: "transparent",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderWidth: 4,
-          backgroundColor: "transparent",
-          fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-          maxBarThickness: 6
-
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#f8f9fa',
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-  </script>
+  
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -356,6 +113,249 @@
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{asset('style/assets/js/material-dashboard.min.js?v=3.0.1')}}"></script>
   @yield('script')
+
+  <script>
+	$(document).ready(function(e){
+		$(".status").click(function(e){
+			var index = $(".status").index(this);
+			var myStatus = '';
+			console.log(index);
+			switch(index){
+			  case 0:
+				  myStatus = 'all';
+				  break;
+			  case 1:
+				  myStatus = 'unverified';
+				  break;
+			  case 2:
+				  myStatus = 'waiting';
+				  break;
+			  case 3:
+				  myStatus = 'verified';
+				  break;
+			  case 4:
+				  myStatus = 'delivered';
+				  break;
+			  case 5:
+				  myStatus = 'success';
+				  break;
+			  case 6:
+				  myStatus = 'canceled';
+				  break;
+  
+			}
+  
+			console.log(myStatus);
+		  jQuery.ajax({
+				url: "{{url('/admin/transaksi/sort')}}",
+				method: 'post',
+				data: {
+					_token: $('#signup-token').val(),
+					status: myStatus,
+				},
+				success: function(result){
+				  $('.ganti').html(result.hasil);
+				}
+			});
+		});
+	  });
+  </script>
+  <script>
+    window.onload = function () {
+    
+    var options = {
+        axisX: {
+            interval:1,
+            labelMaxWidth: 180,           
+            labelAngle: -45,
+            labelFontFamily:"Calibri"
+        },
+        title: {
+            text: "Grafik Jumlah Transaksi Perbulan {{date('Y')}}"              
+        },
+        data: [              
+        {
+            type: "column",
+            dataPoints: [
+                { label: "Januari",  y: parseInt($('#bulan1').val())},
+                { label: "Februari", y: parseInt($('#bulan2').val())},
+                { label: "Maret", y: parseInt($('#bulan3').val())},
+                { label: "April", y: parseInt($('#bulan4').val())},
+                { label: "Mei",  y: parseInt($('#bulan5').val())},
+                { label: "Juni",  y: parseInt($('#bulan6').val())},
+                { label: "Juli",  y: parseInt($('#bulan7').val())},
+                { label: "Agustus", y: parseInt($('#bulan8').val())},
+                { label: "September", y: parseInt($('#bulan9').val())},
+                { label: "Oktober",  y: parseInt($('#bulan10').val())},
+                { label: "November",  y: parseInt($('#bulan11').val())},
+                { label: "Desember",  y: parseInt($('#bulan12').val())},
+            ]
+        }
+        ]
+    };
+    
+    $("#chartContainer").CanvasJSChart(options);
+    }
+</script>  
+
+<script>
+    function formatRupiah(angka, prefix){
+			var number_string = angka.toString(),
+			split   		= number_string.split(','),
+			sisa     		= split[0].length % 3,
+			rupiah     		= split[0].substr(0, sisa),
+			ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+ 
+			// tambahkan titik jika yang di input sudah menjadi angka ribuan
+			if(ribuan){
+				separator = sisa ? '.' : '';
+				rupiah += separator + ribuan.join('.');
+			}
+ 
+			rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+			return prefix == undefined ? rupiah : (rupiah ? 'Rp ' + rupiah : '');
+	}
+
+    function creteChart(tahun, ttlTahun, judul = ''){
+        var options = {
+                            axisX: {
+                                interval:1,
+                                labelMaxWidth: 180,           
+                                labelAngle: -45,
+                                labelFontFamily:"Times New Roman"
+                            },
+                            title: {
+                                text: "Grafik Jumlah Transaksi "+judul+" Perbulan "+ttlTahun              
+                            },
+                            data: [              
+                            {
+                                type: "column",
+                                dataPoints: [
+                                    { label: "Januari",  y: tahun[1]},
+                                    { label: "Februari", y: tahun[2]},
+                                    { label: "Maret", y: tahun[3]},
+                                    { label: "April", y: tahun[4]},
+                                    { label: "Mei",  y: tahun[5]},
+                                    { label: "Juni",  y: tahun[6]},
+                                    { label: "Juli",  y: tahun[7]},
+                                    { label: "Agustus", y: tahun[8]},
+                                    { label: "September", y: tahun[9]},
+                                    { label: "Oktober",  y: tahun[10]},
+                                    { label: "November",  y: tahun[11]},
+                                    { label: "Desember",  y: tahun[12]},
+                                    
+                                ]
+                            }
+                            ]
+                        };
+                        
+                        $("#chartContainer").CanvasJSChart(options);
+    }
+      jQuery(document).ready(function(e){
+          console.log($('#bulan1').val())
+          jQuery('#bulan').change(function(e){
+                jQuery.ajax({
+                    url: "{{url('/report-bulan')}}",
+                    method: 'post',
+                    data: {
+                        _token: $('#signup-token').val(),
+                        bulan: $('#bulan').val(),
+                        tahun: $('#tahun').val(),
+                    },
+                    success: function(result){
+                        $('#total').text(result.data['total']);
+                        $('#unverified').text(result.data['unverified']);
+                        $('#expired').text(result.data['expired']);
+                        $('#canceled').text(result.data['canceled']);
+                        $('#verified').text(result.data['verified']);
+                        $('#delivered').text(result.data['delivered']);
+                        $('#success').text(result.data['success']);
+                        var uang = formatRupiah(result.data['harga'],'Rp ');
+                        $('#harga').text(uang);
+                    }
+                });
+          });
+
+          jQuery('#tahun').change(function(e){
+                jQuery.ajax({
+                    url: "{{url('/report-tahun')}}",
+                    method: 'post',
+                    data: {
+                        _token: $('#signup-token').val(),
+                        bulan: $('#bulan').val(),
+                        tahun: $('#tahun').val(),
+                    },
+                    success: function(result){
+                        $('#total').text(result.data_bulan['total']);
+                        $('#unverified').text(result.data_bulan['unverified']);
+                        $('#expired').text(result.data_bulan['expired']);
+                        $('#canceled').text(result.data_bulan['canceled']);
+                        $('#verified').text(result.data_bulan['verified']);
+                        $('#delivered').text(result.data_bulan['delivered']);
+                        $('#success').text(result.data_bulan['success']);
+                        var uang = formatRupiah(result.data_bulan['harga'],'Rp ');
+                        $('#harga').text(uang);
+
+                        $('#total-tahun').text(result.data['total']);
+                        $('#unverified-tahun').text(result.data['unverified']);
+                        $('#expired-tahun').text(result.data['expired']);
+                        $('#canceled-tahun').text(result.data['canceled']);
+                        $('#verified-tahun').text(result.data['verified']);
+                        $('#delivered-tahun').text(result.data['delivered']);
+                        $('#success-tahun').text(result.data['success']);
+                        var uang_tahun = formatRupiah(result.data['harga'],'Rp ');
+                        $('#harga-tahun').text(uang_tahun);
+                        
+                        creteChart(result.tahun, $('#tahun').val());
+                    }
+
+                });
+          });
+
+          $(".status").click(function(e){
+            var index = $(".status").index(this);
+            var myStatus = '';
+            switch(index){
+                case 0:
+                    myStatus = 'all';
+                    break;
+                case 1:
+                    myStatus = 'unverified';
+                    break;
+                case 2:
+                    myStatus = 'expired';
+                    break;
+                case 3:
+                    myStatus = 'verified';
+                    break;
+                case 4:
+                    myStatus = 'delivered';
+                    break;
+                case 5:
+                    myStatus = 'success';
+                    break;
+                case 6:
+                    myStatus = 'canceled';
+                    break;
+
+            }
+            jQuery.ajax({
+                url: "{{url('/grafik')}}",
+                method: 'post',
+                data: {
+                    _token: $('#signup-token').val(),
+                    status: myStatus,
+                    tahun: $('#tahun').val(),
+                },
+                success: function(result){
+                    creteChart(result.grafik, $('#tahun').val(), myStatus);
+                }
+            });
+        });
+
+      });
+</script>
+
 </body>
 
 </html>
