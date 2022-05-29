@@ -7,17 +7,22 @@ use App\Models\ProductCategories;
 use App\Models\Discount;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use App\Models\UserNotifications;
+
 use Illuminate\Support\Facades\DB;
 
 class HomeUnauthController extends Controller
 {
     public function index(){
-        
         $categories = ProductCategories::with('product')->get();
         
         $products = Product::with('product_images','product_category_details','product_categories')->get();
+
+        $user_notifications = UserNotifications::all();
+
+        // dd($user_notifications);
         
-        return view('home',['product' => $products, 'product_categories' => $categories]);
+        return view('home',['product' => $products, 'product_categories' => $categories, 'user_notifications' => $user_notifications ]);
     }
 
     public function show($id){
