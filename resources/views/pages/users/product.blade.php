@@ -6,11 +6,10 @@
             <div class="col-lg-5 pb-5">
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner border">
-                        @foreach ($product->product_images as $image)
-                            <div class="carousel-item active">
-                                <img class="w-100 h-100" src="{{ asset($image->image_name) }}"
-                                    alt="Image">
-                            </div>
+                        @foreach($product->product_images as $image)
+                            <div class="carousel-item {{$loop->iteration == 1 ? 'active' : ''}}">                            
+                                <img class="" src="{{ asset($image->image_name) }}" alt="Image" style="width: 350px; height: 350px;">                                                        
+                            </div>                        
                         @endforeach
                     </div>
                     <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
